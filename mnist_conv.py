@@ -49,6 +49,15 @@ train(
 )
 
 # test
+y_test_pred = []
+y_test_true = []
 for x, y in zip(x_test, y_test):
     output = predict(network, x)
+    y_test_pred.append(np.argmax(output))
+    y_test_true.append(np.argmax(y))
     print(f"pred: {np.argmax(output)}, true: {np.argmax(y)}")
+    
+y_test_pred = np.array(y_test_pred)
+y_test_true = np.array(y_test_true)
+accuracy = (y_test_pred == y_test_true).sum() / len(y_test_pred)
+print(f'accuracy: {accuracy*100}%')
